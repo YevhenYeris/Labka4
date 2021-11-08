@@ -1,0 +1,12 @@
+0
+4
+start
+1 A
+start A \s
+start A \t
+start A \n
+start A \r
+A A \s
+A A \t
+A A \n
+A A \r

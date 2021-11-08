@@ -1,0 +1,25 @@
+0
+21
+start
+1 A
+start A \s
+start A +
+start A -
+start A *
+start A /
+start A ,
+start A ;
+start A >
+start A <
+start A =
+start A (
+start A )
+start A [
+start A ]
+start A {
+start A }
+start A \n
+start A :
+start A %
+start A \r
+start A \t

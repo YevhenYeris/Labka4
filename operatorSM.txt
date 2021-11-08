@@ -1,0 +1,50 @@
+20
+35
+start
+3 operator operator< operator>
+start A :
+A operator =
+start operator +
+start operator -
+start operator *
+start operator /
+start operator %
+A operator =
+start operator< <
+start operator> >
+operator< > operator
+operator< < operator
+operator> > operator
+start B a
+B C n
+C operator d
+start D t
+D E h
+E F e
+F operator n
+start G o
+G operator r
+start H e
+H I l
+I J s
+J operator e
+start K n
+K L o
+L operator t
+start operator |
+start operator &
+start operator !
+start M x
+M N o
+N operator r
+operator O s
+O P h
+P operator l
+P operator r
+start Q d
+Q R i
+R operator v
+start S m
+S T o
+T operator d
+start operator %

@@ -1,0 +1,8 @@
+0
+4
+start
+1 A
+start A (
+start A )
+start A [
+start A ]

@@ -1,0 +1,8 @@
+4
+1
+start
+1 delimiter
+start delimiter ;
+start delimiter .
+start delimiter :
+delimiter A =
