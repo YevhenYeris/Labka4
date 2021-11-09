@@ -35,6 +35,7 @@ readkey - identifier
 {} - comment
 // - comment
 A - identifier
+: - delimiter
 := - operator
 4 - number
 + - operator
@@ -44,13 +45,17 @@ A - identifier
 % - operator
 7 - number
 + - operator
-9.213 - number
+9 - number
+. - delimiter
+213 - number
 ; - delimiter
 B - identifier
+: - delimiter
 := - operator
 0x98BF3 - number
 ; - delimiter
 arr - identifier
+: - delimiter
 := - operator
 Integer - identifier
 [ - bracket
@@ -58,6 +63,7 @@ Integer - identifier
 ] - bracket
 ; - delimiter
 F - identifier
+: - delimiter
 := - operator
 F - identifier
 ( - bracket
@@ -65,8 +71,9 @@ F - identifier
 ) - bracket
 ; - delimiter
 for - identifier
+a - identifier
+: - delimiter
 := - operator
-1 - number
 to - keyword
 1000000 - number
 do - keyword

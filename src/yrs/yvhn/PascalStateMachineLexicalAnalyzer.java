@@ -87,10 +87,13 @@ public class PascalStateMachineLexicalAnalyzer {
 
     public String ReadTokens() throws IOException
     {
-            int left = 0, right = 0;
-            int len = _code.length();
+        int left = 0, right = 0;
+        int len = _code.length();
 
-            while (right < len && left <= right) {
+        StringBuilder resBuilder = new StringBuilder();
+
+        String prevChar = "";
+        while (right < len && left <= right) {
 
                 String currChar = Character.toString(_code.charAt(right));
 
@@ -99,7 +102,7 @@ public class PascalStateMachineLexicalAnalyzer {
                     {
                         ++right;
                     }
-                    _resOfAnalysis += "{} - comment\n";
+                    resBuilder.append("{} - comment\n");
                     left = ++right;
                     continue;
                 }
@@ -108,7 +111,7 @@ public class PascalStateMachineLexicalAnalyzer {
                     {
                         ++right;
                     }
-                    _resOfAnalysis += "// - comment\n";
+                    resBuilder.append("// - comment\n");
                     left = ++right;
                     continue;
                 }
@@ -117,26 +120,23 @@ public class PascalStateMachineLexicalAnalyzer {
                     while (++right < len && left <= right && _code.charAt(right) != '*' && right + 1 < len && _code.charAt(right + 1) != ')')
                     {
                     }
-                    _resOfAnalysis += "(**) - comment\n";
+                    resBuilder.append("(**) - comment\n");
                     right += 2;
                     left = right;
                     continue;
                 }
 
-                if (currChar.equals(":") && right + 1 < len && _code.charAt(right + 1) == '=')
+                if (currChar.equals("=") && prevChar.equals(":"))
                 {
-                    _resOfAnalysis += ":= - operator\n";
+                    resBuilder.append(":= - operator\n");
                     right += 2;
                     left = right;
                     continue;
                 }
 
                 if (currChar.equals("'")) {
-                    while (++right <= len && left <= right && _code.charAt(right) != '\'')
-                    {
-
-                    }
-                    _resOfAnalysis += _code.substring(left, ++right) + " - character constant\n";
+                    while (++right <= len && left <= right && _code.charAt(right) != '\'') { }
+                    resBuilder.append(_code.substring(left, ++right)).append(" - character constant\n");
                     left = right;
                     continue;
                 }
@@ -146,45 +146,49 @@ public class PascalStateMachineLexicalAnalyzer {
 
                 if (isDelimiter(currChar) && left == right) {
                     if (isOperator(currChar))
-                        _resOfAnalysis += currChar + " - " + "operator\n";
+                        resBuilder.append(currChar).append(" - ").append("operator\n");
 
                     if (isBracket(currChar))
-                        _resOfAnalysis += currChar + " - bracket\n";
+                        resBuilder.append(currChar).append(" - bracket\n");
 
                     if (isDelimiterLexeme(currChar))
-                        _resOfAnalysis += currChar + " - delimiter\n";
+                        resBuilder.append(currChar).append(" - delimiter\n");
 
                     right++;
-                    left = right; 
+                    left = right;
                 } else if (isDelimiter(currChar) && left != right
                         || right == len) {
 
                     String substr = _code.substring(left, right);
 
                     if (isKeyWord(substr))
-                        _resOfAnalysis += substr + " - " + "keyword\n";
+                        resBuilder.append(substr).append(" - ").append("keyword\n");
 
                     else if (isDirective(substr))
-                        _resOfAnalysis += substr + " - " + "preprocessor directive\n";
+                        resBuilder.append(substr).append(" - ").append("preprocessor directive\n");
 
                     else if (isOperator(substr))
-                        _resOfAnalysis += substr + " - " + "operator\n";
+                        resBuilder.append(substr).append(" - ").append("operator\n");
 
                     else if (isNumber(substr))
-                        _resOfAnalysis += substr + " - " + "number\n";
+                        resBuilder.append(substr).append(" - ").append("number\n");
 
                     else if (isIdentifier(substr))
-                        _resOfAnalysis += substr + " - " + "identifier\n";
-
-                    else if (substr.equals("end."))
-                        _resOfAnalysis += "end - keyword\n. - delimiter\n";
+                        resBuilder.append(substr).append(" - ").append("identifier\n");
 
                     else if (!isEmpty(substr))
-                        _resOfAnalysis += substr + " - " + "undefined\n";
+                        resBuilder.append(substr).append(" - ").append("undefined\n");
+
+                    if (isIdentifier(prevChar) && currChar.equals(".")) {
+                        ++right;
+                        resBuilder.append(currChar).append(" - delimiter\n");
+                    }
 
                     left = right;
                 }
-            }
-            return _resOfAnalysis;
+            prevChar = currChar;
+        }
+        _resOfAnalysis = resBuilder.toString();
+        return _resOfAnalysis;
     }
 }

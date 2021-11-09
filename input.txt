@@ -1,4 +1,3 @@
-
 $TYPEINFO
 $MACRO
 $Z1

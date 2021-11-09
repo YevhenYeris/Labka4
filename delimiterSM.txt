@@ -3,6 +3,7 @@
 start
 1 A
 start A \s
+start A .
 start A +
 start A -
 start A *
